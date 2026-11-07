@@ -1,6 +1,7 @@
 import flet as ft
 from datetime import datetime
 import asyncio
+import os
 
 # Tabela Comercial Oficial de Puxadas do Jogo do Bicho
 TABELA_PUXADAS = {
@@ -175,18 +176,12 @@ async def main(page: ft.Page):
 import os
 
 if __name__ == "__main__":
-    # Pega a porta da nuvem ou usa 8550 no PC
     porta = int(os.environ.get("PORT", 8550))
-    
-    # Se estiver na nuvem (com variável PORT), usa 0.0.0.0. No PC, usa 127.0.0.1
-    endereco_host = "0.0.0.0" if "PORT" in os.environ else "127.0.0.1"
-    
     asyncio.run(
         ft.run_async(
-            main, 
-            view=ft.AppView.WEB_BROWSER, 
-            port=porta, 
-            host=endereco_host, 
+            main,
+            port=porta,
+            host="0.0.0.0",
             assets_dir="assets"
         )
     )
